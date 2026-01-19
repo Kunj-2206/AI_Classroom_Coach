@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:orientation="horizontal"
+    android:padding="24dp"
+    tools:context="com.example.aiclassroomcoach.MainActivity">
 
     <TextView
         android:id="@+id/titleText"
@@ -20,7 +22,7 @@
         android:text="Status: Idle"
         android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
 
-    <Switch
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/alwaysOnSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,4 +50,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Class is noisy during fractions lesson. Need quick steps to calm and explain equivalent fractions." />
+
 </LinearLayout>
