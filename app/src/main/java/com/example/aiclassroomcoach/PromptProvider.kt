@@ -24,5 +24,5 @@ Output style:
 - Numbered steps
 - Short sentences
 - Speakable language
-""".trimIndent()
+"""
 }
