@@ -1,16 +1,19 @@
 package com.example.aiclassroomcoach
 
+import android.Manifest
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.AudioTrack
 import android.media.MediaRecorder
 import android.util.Base64
+import androidx.annotation.RequiresPermission
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.nio.ByteBuffer
+import android.util.Log
 import java.nio.ByteOrder
 
 class AudioStreamManager(
@@ -25,7 +28,9 @@ class AudioStreamManager(
     private var audioRecord: AudioRecord? = null
     private var audioTrack: AudioTrack? = null
 
+    @RequiresPermission(Manifest.permission.RECORD_AUDIO)
     fun startRecording() {
+        Log.d("AudioManager", "Recording started")
         if (recordJob?.isActive == true) return
         val bufferSize = AudioRecord.getMinBufferSize(
             inputSampleRate,

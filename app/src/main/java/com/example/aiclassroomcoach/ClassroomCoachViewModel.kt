@@ -1,11 +1,14 @@
 package com.example.aiclassroomcoach
 
+import android.Manifest
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import android.util.Log
+import androidx.annotation.RequiresPermission
 
 class ClassroomCoachViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(CoachUiState())
@@ -24,7 +27,9 @@ class ClassroomCoachViewModel : ViewModel() {
     )
 
     fun connect() {
+        Log.d("ClassroomCoachViewModel", "ClassroomCoachViewModel connect called")
         if (BuildConfig.GEMINI_API_KEY.isBlank()) {
+            Log.d("ClassroomCoachViewModel", "API key missing")
             setStatus("Missing API key")
             return
         }
@@ -37,7 +42,9 @@ class ClassroomCoachViewModel : ViewModel() {
         setStatus("Disconnected")
     }
 
+    @RequiresPermission(Manifest.permission.RECORD_AUDIO)
     fun startPushToTalk() {
+        Log.d("ViewModel", "ClassroomCoachViewModel startPushToTalk called - starting recording")
         audioStreamManager.stopPlayback()
         audioStreamManager.startRecording()
         setStatus("Listening")
@@ -51,6 +58,7 @@ class ClassroomCoachViewModel : ViewModel() {
         setStatus("Awaiting response")
     }
 
+    @RequiresPermission(Manifest.permission.RECORD_AUDIO)
     fun toggleAlwaysOn(enabled: Boolean) {
         if (enabled) {
             startPushToTalk()
@@ -65,6 +73,7 @@ class ClassroomCoachViewModel : ViewModel() {
             is GeminiLiveEvent.Disconnected -> setStatus("Disconnected")
             is GeminiLiveEvent.Error -> setStatus("Error: ${event.message}")
             is GeminiLiveEvent.RawResponse -> handleResponse(event.payload)
+            else -> {}
         }
     }
 

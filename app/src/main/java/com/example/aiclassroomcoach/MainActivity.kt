@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.aiclassroomcoach.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -27,15 +29,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        viewModel.connect()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.pushToTalkButton.setOnTouchListener { _, event ->
             when (event.action) {
-                android.view.MotionEvent.ACTION_DOWN -> viewModel.startPushToTalk()
+                android.view.MotionEvent.ACTION_DOWN -> {Log.d("MainActivity", "Button pressed - calling startPushToTalk")
+                    viewModel.startPushToTalk()}
                 android.view.MotionEvent.ACTION_UP,
-                android.view.MotionEvent.ACTION_CANCEL -> viewModel.stopPushToTalk()
+                android.view.MotionEvent.ACTION_CANCEL -> {Log.d("MainActivity", "Button released - calling stopPushToTalk")
+                    viewModel.stopPushToTalk()}
             }
             true
         }
