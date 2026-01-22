@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="24dp"
-    tools:context="com.example.aiclassroomcoach.MainActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/titleText"
@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
-        android:layout_height="96dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Status: Idle"
         android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
@@ -44,11 +44,18 @@
         android:text="Demo Teacher Prompt"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-    <TextView
-        android:id="@+id/demoPromptBody"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Class is noisy during fractions lesson. Need quick steps to calm and explain equivalent fractions." />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/demoPromptBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Class is noisy during fractions lesson. Need quick steps to calm and explain equivalent fractions." />
+
+    </ScrollView>
 
 </LinearLayout>
